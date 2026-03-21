@@ -76,6 +76,13 @@ function populatePortfolio(data) {
   document.getElementById('roles').textContent = data.personal.roles.join('  |  ');
   document.getElementById('about-me').textContent = data.about;
 
+  // Opportunities Badge
+  const oppBadge = document.getElementById('opportunities-badge');
+  if (oppBadge && data.settings && data.settings.seekingOpportunities) {
+    oppBadge.innerHTML = `<span class="status-active" style="margin-left: 0; padding: 8px 16px; font-size: 0.95rem;"><span class="blink-dot"></span> Actively Seeking New Opportunities</span>`;
+    oppBadge.classList.remove('hidden');
+  }
+
   // Contact Info & Resume Button
   const navResumeBtn = document.getElementById('nav-resume-btn');
   if (navResumeBtn && data.personal.resume) {
@@ -118,10 +125,10 @@ function populatePortfolio(data) {
     socialRow.style.gap = '10px';
 
     if (data.personal.linkedin) {
-      socialRow.insertAdjacentHTML('beforeend', `<a href="${data.personal.linkedin}" class="contact-link" target="_blank"><i class="fa-solid fa-linkedin"></i><span>LinkedIn</span></a>`);
+      socialRow.insertAdjacentHTML('beforeend', `<a href="${data.personal.linkedin}" class="contact-link" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="20" height="20" alt="LinkedIn"><span>LinkedIn</span></a>`);
     }
     if (data.personal.github) {
-      socialRow.insertAdjacentHTML('beforeend', `<a href="${data.personal.github}" class="contact-link" target="_blank"><i class="fa-solid fa-github"></i><span>GitHub</span></a>`);
+      socialRow.insertAdjacentHTML('beforeend', `<a href="${data.personal.github}" class="contact-link" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="20" height="20" alt="GitHub" style="filter: invert(var(--icon-invert));"><span>GitHub</span></a>`);
     }
     contactContainer.appendChild(socialRow);
   }
@@ -142,14 +149,24 @@ function populatePortfolio(data) {
 
   const bottomSocialLinks = document.getElementById('bottom-social-links');
   if (bottomSocialLinks) {
+    bottomSocialLinks.innerHTML = '';
     validContacts.forEach(contact => {
       // Create social links excluding simple text like location
       if (contact.href && contact.icon !== 'fa-location-dot') {
         const a = document.createElement('a');
         a.href = contact.href;
+        a.className = 'social-icon';
         if (contact.target) a.target = contact.target;
         if (contact.download) a.download = '';
-        a.innerHTML = `<i class="fa-solid ${contact.icon}"></i>`;
+        
+        if (contact.text === 'LinkedIn') {
+            a.innerHTML = `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="24" height="24" alt="LinkedIn">`;
+        } else if (contact.text === 'GitHub') {
+            a.innerHTML = `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="24" height="24" alt="GitHub" style="filter: invert(var(--icon-invert, 0));">`;
+        } else {
+            a.innerHTML = `<i class="${contact.text === 'LinkedIn' || contact.text === 'GitHub' ? 'fa-brands' : 'fa-solid'} ${contact.icon}"></i>`;
+        }
+        
         a.title = contact.text;
         bottomSocialLinks.appendChild(a);
       }
@@ -192,6 +209,33 @@ function populatePortfolio(data) {
     expContainer.appendChild(item);
   });
 
+  // --- Projects ---
+  const projectsContainer = document.getElementById('projects-container');
+  if (data.projects && data.projects.length > 0) {
+    data.projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+
+      let activeBadge = project.isActive ? `<span class="status-active"><span class="blink-dot"></span> Active</span>` : '';
+      let tagsHtml = project.techStack ? `<div class="tags-container" style="margin: 0 0 1.2rem 0; gap: 6px;">${project.techStack.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
+      let linkHtml = project.link ? `<a href="${project.link}" target="_blank" class="contact-link" style="padding: 6px 18px; font-size: 0.9rem; align-self: flex-start; justify-content: center; gap: 8px;">View Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : '';
+
+      card.innerHTML = `
+        <div class="project-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 0.8rem;">
+          <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">${project.name}</span>
+          ${activeBadge}
+        </div>
+        ${tagsHtml}
+        <p class="project-desc" style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">${project.description || ''}</p>
+        ${linkHtml}
+      `;
+      projectsContainer.appendChild(card);
+    });
+  } else {
+    const projSect = document.getElementById('projects-section');
+    if (projSect) projSect.style.display = 'none';
+  }
+
   // --- Education ---
   const eduContainer = document.getElementById('education-container');
   data.education.forEach(edu => {
@@ -216,54 +260,89 @@ function populatePortfolio(data) {
     eduContainer.appendChild(item);
   });
 
-  // --- Skills with Graphs ---
+  // --- Skills ---
+  const getSkillIcon = (name) => {
+    const iconMap = {
+      "Core Java": "devicon-java-plain colored",
+      "Spring MVC": "devicon-spring-original colored",
+      "Spring Boot": "devicon-spring-original colored",
+      "Scala": "devicon-scala-plain colored",
+      "Apache Spark": "devicon-apache-plain colored",
+      "React": "devicon-react-original colored",
+      "HTML": "devicon-html5-plain colored",
+      "CSS": "devicon-css3-plain colored",
+      "JavaScript": "devicon-javascript-plain colored",
+      "Oracle (PL/SQL)": "devicon-oracle-original colored",
+      "MySQL": "devicon-mysql-plain colored",
+      "PostgreSQL": "devicon-postgresql-plain colored",
+      "Cassandra": "devicon-apache-plain colored",
+      "Git": "devicon-git-plain colored",
+      "Bitbucket": "devicon-bitbucket-original colored",
+      "GitLab": "devicon-gitlab-plain colored",
+      "SVN": "fas fa-code-branch",
+      "Kafka": "devicon-apachekafka-original colored",
+      "AWS": "devicon-amazonwebservices-plain-wordmark colored",
+      "Kubernetes": "devicon-kubernetes-plain colored",
+      "OpenShift": "devicon-redhat-plain colored"
+    };
+    return iconMap[name] || "fas fa-laptop-code";
+  };
+
   const skillsContainer = document.getElementById('skills-container');
-  data.skills.forEach(skillCat => {
-    const div = document.createElement('div');
-    div.className = 'skill-category';
+  if (data.skills) {
+    data.skills.forEach(skillCat => {
+      const div = document.createElement('div');
+      div.className = 'skill-category card collapsible-container';
 
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'collapsible-header';
-    headerDiv.style.display = 'flex';
-    headerDiv.style.justifyContent = 'space-between';
-    headerDiv.style.alignItems = 'center';
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'collapsible-header';
+      headerDiv.style.display = 'flex';
+      headerDiv.style.justifyContent = 'space-between';
+      headerDiv.style.alignItems = 'center';
+      headerDiv.style.cursor = 'pointer';
 
-    const h4 = document.createElement('h4');
-    h4.textContent = skillCat.category;
-    h4.style.marginBottom = '0';
+      const h4 = document.createElement('h4');
+      h4.textContent = skillCat.category;
+      h4.style.marginBottom = '0';
+      h4.style.color = 'var(--accent-color)';
+      h4.style.fontSize = '1.2rem';
 
-    const icon = document.createElement('i');
-    icon.className = 'fas fa-chevron-down collapsible-icon open';
+      const icon = document.createElement('i');
+      icon.className = 'fas fa-chevron-down collapsible-icon';
+      icon.style.transition = 'transform 0.3s ease';
 
-    headerDiv.appendChild(h4);
-    headerDiv.appendChild(icon);
-    div.appendChild(headerDiv);
+      headerDiv.appendChild(h4);
+      headerDiv.appendChild(icon);
+      div.appendChild(headerDiv);
 
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'collapsible-content open';
-    contentDiv.style.marginTop = '1.2rem';
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'collapsible-content open';
+      contentDiv.style.marginTop = '1.5rem';
 
-    skillCat.items.forEach(item => {
-      const isObj = typeof item === 'object';
-      const name = isObj ? item.name : item;
-      const level = isObj && item.level ? item.level : 50;
+      skillCat.items.forEach(item => {
+        const isObj = typeof item === 'object';
+        const name = isObj ? item.name : item;
+        const level = isObj && item.level ? item.level : 50;
 
-      const skillDiv = document.createElement('div');
-      skillDiv.className = 'skill-item-container';
-      skillDiv.innerHTML = `
-        <div class="skill-header">
-          <span>${name}</span>
-        </div>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" data-width="${level}%"></div>
-        </div>
-      `;
-      contentDiv.appendChild(skillDiv);
+        const skillDiv = document.createElement('div');
+        skillDiv.className = 'skill-item-container skill-item';
+        skillDiv.style.marginBottom = '1.2rem';
+        skillDiv.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; margin-bottom: 8px;">
+            <i class="${getSkillIcon(name)}" style="font-size: 1.4rem; width: 24px; text-align: center;"></i>
+            <span class="skill-name" style="font-weight: 600; color: var(--text-primary);">${name}</span>
+          </div>
+          <div class="progress-bar-bg skill-bar-bg" style="width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; border: 1px solid var(--glass-border);">
+            <div class="progress-bar-fill skill-bar-fill" data-width="${level}%" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary)); border-radius: 4px; transition: width 1s ease-out;"></div>
+          </div>
+        `;
+        contentDiv.appendChild(skillDiv);
+      });
+
+      div.appendChild(contentDiv);
+      skillsContainer.appendChild(div);
     });
-
-    div.appendChild(contentDiv);
-    skillsContainer.appendChild(div);
-  });
+  }
 
   // --- Achievements ---
   const achContainer = document.getElementById('achievements-container');
@@ -334,7 +413,7 @@ function populatePortfolio(data) {
   }
 }
 
-window.copyToClipboard = function(text, btnElement) {
+window.copyToClipboard = function (text, btnElement) {
   navigator.clipboard.writeText(text).then(() => {
     if (btnElement) {
       const icon = btnElement.querySelector('i');

@@ -10,6 +10,8 @@
     rel="stylesheet">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Devicon for colored technology icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 
 <body>
@@ -23,6 +25,7 @@
       <ul class="nav-links">
         <li><a href="#about-section">About</a></li>
         <li><a href="#experience-section">Experience</a></li>
+        <li><a href="#projects-section">Projects</a></li>
         <li><a href="#education-section">Education</a></li>
         <li><a href="#skills-section">Skills</a></li>
         <li><a href="#contact-bottom-section">Contact</a></li>
@@ -45,6 +48,7 @@
           <h1 id="name"></h1>
           <h2 id="roles"></h2>
           <p id="about-me" class="about-me text-left"></p>
+          <div id="opportunities-badge" class="hidden" style="margin-top: 1.5rem;"></div>
         </div>
         <div class="hero-right">
           <div id="profile-photo-container" class="profile-photo-container hidden">
@@ -79,6 +83,13 @@
           </section>
         </div>
       </div>
+
+      <!-- Projects Row (Full Width) -->
+      <section id="projects-section" class="section glass fade-in">
+        <h3><i class="fas fa-project-diagram"></i> Projects</h3>
+        <div id="projects-container" class="grid-container"
+          style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;"></div>
+      </section>
 
       <!-- Row 2 -->
       <div class="pane-row">
@@ -124,24 +135,24 @@
     </div>
 
     <!-- Long div contact section at the bottom -->
-    <section id="contact-bottom-section" class="section glass fade-in" style="margin-top: 3rem; text-align: center;">
-      <h3 style="justify-content: center; border-bottom: none;"><i class="fas fa-paper-plane"></i> Get In Touch</h3>
-      <div style="max-width: 600px; margin: 0 auto; padding: 1rem 0 2rem 0;">
-        <p style="color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 1.15rem;">I'm currently seeking new
-          opportunities. Whether you have a question or just want to connect, feel free to drop a message!</p>
-        <a id="contact-email-btn" href="" class="contact-link"
-          style="margin: 0 auto; font-size: 1.15rem; padding: 14px 35px; background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary)); color: #fff; border: none; box-shadow: 0 10px 20px -5px var(--accent-glow); justify-content: center; border-radius: 40px; display: flex; width: fit-content;">Say
-          Hello</a>
-
-        <div id="bottom-social-links" class="bottom-social-links"
-          style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap;"></div>
+    <section id="contact-bottom-section" class="section glass fade-in" style="margin-top: 3rem;">
+      <h3 style="border-bottom: 1px solid var(--glass-border); margin-bottom: 2rem; padding-bottom: 1rem;"><i class="fas fa-paper-plane"></i> Get In Touch</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center; padding: 1rem 0;">
+        <div style="text-align: left;">
+          <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.15rem; line-height: 1.8;">I'm currently seeking new opportunities. Whether you have a question or just want to connect, feel free to drop a message!</p>
+          <a id="contact-email-btn" href="" class="contact-link"
+            style="font-size: 1.15rem; padding: 12px 32px; background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary)); color: #fff; border: none; box-shadow: 0 10px 20px -5px var(--accent-glow); border-radius: 40px; display: inline-flex; width: fit-content; transition: transform 0.3s ease;">Say Hello</a>
+        </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
+          <div id="bottom-social-links" class="bottom-social-links"
+            style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;"></div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="current-year"></span>. Developed and maintained by Hrushikesh Tiwari.
-  </footer>p>
+    <p>&copy; <span id="current-year"></span>. Developed and maintained by Hrushikesh Tiwari.</p>
   </footer>
 
   <script src="app.js"></script>

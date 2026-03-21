@@ -3,7 +3,8 @@
     "profilePhoto": {
       "enabled": true,
       "url": "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=Blue03&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
-    }
+    },
+    "seekingOpportunities": true
   },
   "personal": {
     "name": "Hrushikesh Tiwari",
@@ -76,6 +77,29 @@
         "Modernized legacy codebases, removing vulnerabilities and improving security.",
         "Collaborated across all stages of the SDLC, from requirements to production releases."
       ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portfolio Website",
+      "description": "A dynamic, high-performance portfolio utilizing completely native JSON architecture arrays and Vanilla ES6 DOM rendering.",
+      "techStack": [
+        "HTML5",
+        "CSS3",
+        "Vanilla JS"
+      ],
+      "isActive": true,
+      "link": "https://github.com/hrushi2711/portfolio"
+    },
+    {
+      "name": "LiveCoronaTracker",
+      "description": "A React-based web application for tracking COVID-19 statistics in real-time with live data visualization and monitoring capabilities.",
+      "techStack": [
+        "JavaScript",
+        "React"
+      ],
+      "isActive": false,
+      "link": "https://github.com/hrushi2711/LiveCoronaTracker"
     }
   ],
   "education": [
