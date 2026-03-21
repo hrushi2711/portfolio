@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Loading...</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Background Animation Layer -->
+  <div class="bg-layer"></div>
+
+  <!-- Top Navigation Header -->
+  <nav class="top-nav glass fade-in">
+    <div class="nav-content">
+      <div class="logo">Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="#about-section">About</a></li>
+        <li><a href="#experience-section">Experience</a></li>
+        <li><a href="#education-section">Education</a></li>
+        <li><a href="#skills-section">Skills</a></li>
+        <li><a href="#contact-bottom-section">Contact</a></li>
+      </ul>
+      <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
+        <a id="nav-resume-btn" href="" class="nav-resume-btn hidden" download><i class="fas fa-download"></i> <span
+            class="hide-mobile">Resume</span></a>
+        <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-sun" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Header / Hero Section (Width equals below 2 div) -->
+    <header id="about-section" class="hero fade-in">
+      <div class="hero-content glass section-padding hero-grid">
+        <div class="hero-left text-left">
+          <h1 id="name"></h1>
+          <h2 id="roles"></h2>
+          <p id="about-me" class="about-me text-left"></p>
+        </div>
+        <div class="hero-right">
+          <div id="profile-photo-container" class="profile-photo-container hidden">
+            <img id="profile-photo" src="" alt="Profile Photo">
+          </div>
+          <div id="contact-info" class="contact-info contact-column"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout-stack">
+      <!-- Row 1 -->
+      <div class="pane-row">
+        <div class="pane-col">
+          <!-- Experience Section -->
+          <section id="experience-section" class="section glass fade-in">
+            <h3><i class="fas fa-briefcase"></i> Experience</h3>
+            <div id="experience-container" class="timeline"></div>
+          </section>
+
+          <!-- Education Section -->
+          <section id="education-section" class="section glass fade-in">
+            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+            <div id="education-container" class="timeline"></div>
+          </section>
+        </div>
+        <div class="pane-col">
+          <!-- Skills Section -->
+          <section id="skills-section" class="section glass fade-in">
+            <h3><i class="fas fa-code"></i> Skills</h3>
+            <div id="skills-container" class="grid-container"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="pane-row">
+        <div class="pane-col">
+          <!-- Achievements Section -->
+          <section id="achievements-section" class="section glass fade-in">
+            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+            <div id="achievements-container" class="list-container"></div>
+          </section>
+        </div>
+        <div class="pane-col">
+          <!-- Awards Section -->
+          <section id="awards-section" class="section glass fade-in">
+            <h3><i class="fas fa-medal"></i> Awards</h3>
+            <div id="awards-container" class="list-container"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="pane-row">
+        <div class="pane-col">
+          <!-- Certificates -->
+          <section id="certificates-section" class="section glass fade-in">
+            <h3><i class="fas fa-certificate"></i> Certificates</h3>
+            <div id="certificates-container" class="list-container"></div>
+          </section>
+        </div>
+        <div class="pane-col">
+          <!-- Other Info Section -->
+          <section id="other-section" class="section glass fade-in">
+            <div class="sub-section">
+              <h3><i class="fas fa-globe"></i> Languages</h3>
+              <div id="languages-container" class="list-tags"></div>
+            </div>
+            <div class="sub-section mt-3">
+              <h3><i class="fas fa-heart"></i> Interests</h3>
+              <div id="interests-container" class="list-tags"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long div contact section at the bottom -->
+    <section id="contact-bottom-section" class="section glass fade-in" style="margin-top: 3rem; text-align: center;">
+      <h3 style="justify-content: center; border-bottom: none;"><i class="fas fa-paper-plane"></i> Get In Touch</h3>
+      <div style="max-width: 600px; margin: 0 auto; padding: 1rem 0 2rem 0;">
+        <p style="color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 1.15rem;">I'm currently seeking new
+          opportunities. Whether you have a question or just want to connect, feel free to drop a message!</p>
+        <a id="contact-email-btn" href="" class="contact-link"
+          style="margin: 0 auto; font-size: 1.15rem; padding: 14px 35px; background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary)); color: #fff; border: none; box-shadow: 0 10px 20px -5px var(--accent-glow); justify-content: center; border-radius: 40px; display: flex; width: fit-content;">Say
+          Hello</a>
+
+        <div id="bottom-social-links" class="bottom-social-links"
+          style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="current-year"></span>. Developed and maintained by Hrushikesh Tiwari.
+  </footer>p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
