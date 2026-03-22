@@ -92,6 +92,18 @@
       "link": "https://github.com/hrushi2711/portfolio"
     },
     {
+      "name": "SpendSync",
+      "description": "A Flutter & Dart-based lightweight credit card expense tracker that helps users log expenses, view a dashboard of spending habits, and track progress toward annual fee waivers. Designed as a modern replacement for Excel-based trackers, SpendSync automates calculations and provides a clean, mobile-friendly interface.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "sqflite (SQLite)",
+        "Provider/Riverpod"
+      ],
+      "isActive": true,
+      "link": "https://hrushi2711.github.io/spendsync-web"
+    },
+    {
       "name": "LiveCoronaTracker",
       "description": "A React-based web application for tracking COVID-19 statistics in real-time with live data visualization and monitoring capabilities.",
       "techStack": [
